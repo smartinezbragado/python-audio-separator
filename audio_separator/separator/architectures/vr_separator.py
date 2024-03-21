@@ -317,10 +317,8 @@ class VRSeparator(CommonSeparator):
         return y_spec, v_spec
 
     def spec_to_wav(self, spec):
-        # Check if the spec contains only finite values
-        if not np.isfinite(spec).all():
-            self.logger.error("Spectrogram contains non-finite values. Attempting to fix.")
-            spec = np.nan_to_num(spec)  # Replace NaN and infinite values with zero (consider if appropriate for your case)
+        # Ensure the spectrogram contains only finite values
+        spec = np.nan_to_num(spec, nan=0.0, posinf=0.0, neginf=0.0)
 
         if self.high_end_process and isinstance(self.input_high_end, np.ndarray) and self.input_high_end_h:
             input_high_end_ = spec_utils.mirroring("mirroring", spec, self.input_high_end, self.model_params)
