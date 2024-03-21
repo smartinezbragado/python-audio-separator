@@ -94,9 +94,7 @@ class Separator:
         if log_level > logging.DEBUG:
             warnings.filterwarnings("ignore")
 
-        package_version = self.get_package_distribution("audio-separator").version
-
-        self.logger.info(f"Separator version {package_version} instantiating with output_dir: {output_dir}, output_format: {output_format}")
+        self.logger.info(f"Separator version instantiating with output_dir: {output_dir}, output_format: {output_format}")
 
         self.model_file_dir = model_file_dir
         self.output_dir = output_dir
